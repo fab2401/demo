@@ -23,8 +23,8 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run: mvn clean package
-      - name: List target directory
-        run: ls target
+      - name: Debug effective POM
+        run: mvn help:effective-pom | grep distributionManagement
       - name: Test Report (mikepenz)
         uses: mikepenz/action-junit-report@v5
         if: success() || failure() # always run even if the previous step fails
