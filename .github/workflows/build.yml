@@ -24,7 +24,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
       - name: Debug effective POM
-        run: mvn help:effective-pom | grep distributionManagement
+        run: mvn help:effective-pom
       - name: Test Report (mikepenz)
         uses: mikepenz/action-junit-report@v5
         if: success() || failure() # always run even if the previous step fails
