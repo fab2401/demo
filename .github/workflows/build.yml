@@ -25,6 +25,18 @@ jobs:
         run: mvn clean package
       - name: List target directory
         run: ls target
+      - name: Test Report (mikepenz)
+        uses: mikepenz/action-junit-report@v5
+        if: success() || failure() # always run even if the previous step fails
+        with:
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+      - name: Test Report (dorny)
+        uses: dorny/test-reporter@v2
+        if: ${{ !cancelled() }}       # run this step even if previous step failed
+        with:
+          name: JEST Tests            # Name of the check run which will be created
+          path: '**/target/surefire-reports/TEST-*.xml'    # Path to test results
+          reporter: jest-junit        # Format of test results
       - name: upload artifact
         uses: actions/upload-artifact@v4
         with:
