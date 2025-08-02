@@ -9,6 +9,8 @@ on:
 jobs:
   checkout-build-upload:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     defaults:
       run:
         working-directory: .
