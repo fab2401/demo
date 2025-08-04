@@ -56,6 +56,8 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '24.x'
+    - name: Installer les dépendances
+      run: npm install
     - name: Installer Angular CLI
       run: npm install -g @angular/cli
     - run: npm run build --if-present
@@ -65,6 +67,9 @@ jobs:
       packages: write
     needs:
       - build-maven
+    defaults:
+      run:
+        working-directory: ./java-app
     steps:
       - name: upload artifact
         uses: actions/upload-artifact@v4
