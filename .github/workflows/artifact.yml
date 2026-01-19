@@ -1,0 +1,25 @@
+name: Test upload-artifact
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  upload-artifact:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+      - name: After Maven Upload
+        run: |
+          echo "This is the content of ALL folders named /target"
+          ll ./**/target
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: target-folders
+          path: ./**/target
